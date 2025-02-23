@@ -1,0 +1,71 @@
+Глава 9
+id
+uid=1000(codespace) gid=1000(codespace) groups=1000(codespace),106(ssh),107(docker),989(pipx),990(python),991(oryx),992(golang),993(sdkman),994(rvm),995(php),996(conda),997(nvs),998(nvm),999(hugo)
+[311u13@311U13 ~] ➜ /workspaces/mdk.02.01 (main) $ chmod
+chmod: missing operand
+Try 'chmod --help' for more information.
+[311u13@311U13 ~] ➜ /workspaces/mdk.02.01 (main) $ umask
+su — запускает командную оболочку от имени другого пользователя;
+sudo — выполняет команду от имени другого пользователя;
+chown — изменяет владельца файла;
+chgrp — изменяет группу файла;
+passwd — изменяет пароль пользователя.
+file /etc/shadow
+/etc/shadow: regular file, no read permission
+[311u13@311U13 ~]➜ /workspacesi/mdk.02.01 (main) $ ls -l lab2.txt
+-rw-rw-rw- 1 codespace root 9414 Feb  6 04:46 lab2.txt
+ chmod 600 foo.txt
+[311u13@311U13 ~] ls -l lab2.txt
+-rw------- 1 me me 0 2018-03-06 14:52 foo.txt
+u Сокращенно от user (пользователь), означает владельца файла или каталога
+g Группа
+o Сокращенно от others (другие, остальные), означает весь остальной мир
+a Сокращенно от all (все); комбинация из всех трех символов: u, g и o
+u+x Добавляет право на выполнение, но только для владельца
+u-x Отнимает право на выполнение у владельца
++x Добавляет право на выполнение для владельца, группы и остального мира. Эквивалент записи a+x
+o-rw Отнимает право на чтение и запись у всех, кроме владельца
+и группы
+go=rw Устанавливает право на чтение и запись для всех, кроме владельца. Если прежде файл имел разрешение на выполнение для группы
+и всего мира, это право отнимается
+u+x,go=rx
+[311u13@311U13 ~] ➜ /workspaces/mdk.02.01 (main) $ umask
+0022
+[311u13@311U13 ~] ➜ /workspaces/mdk.02.01 (main) $ lab2.txt
+bash: lab2.txt: command not found
+[311u13@311U13 ~] ➜ /workspaces/mdk.02.01 (main) $ > lab2.txt
+[311u13@311U13 ~] ➜ /workspaces/mdk.02.01 (main) $ ls -l lab2.txt
+-rw-rw-rw- 1 codespace codespace 0 Feb  6 05:07 lab2.txt
+$ rm foo.txt
+[311u13@311U13 ~] umask 0000
+[311u13@311U13 ~] > lab2.txt
+[311u13@311U13 ~] ls -l lab2.txt
+rm lab2.txt; umask 0022
+su -c 'ls -l /root/*'
+Пароль:
+-rw------- 1 root root 754 2007-08-11 03:19 /root/anaconda-ks.cfg
+/root/Mail:
+итого 0
+sudo backup_script
+Пароль:
+ sudo -l
+User me may run the following commands on this host:
+ (ALL) ALL
+chown [владелец][:[группа]] файл..
+bob Изменит принадлежность файла, назначив владельцем пользователя bob
+bob:users Изменит принадлежность файла, назначив владельцем пользователя bob
+и группу users
+:admins Изменит принадлежность файла, назначив группу admins
+bob: Изменит принадлежность файла, назначив владельцем пользователя bob
+и группу этого пользователя
+sudo cp myfile.txt ~tony
+Пароль:
+[311u13@311U13 ~] sudo ls -l ~tony/myfile.txt
+-rw-r--r-- 1 root root 8031 2018-03-20 14:30 /home/tony/myfile.
+[311u13@311U13 ~] sudo chown tony: ~tony/myfile.txt
+[311u13@311U13 ~] sudo ls -l ~tony/myfile.txt
+-rw-r--r-- 1 tony tony 8031 2018-03-20 14:30 /home/tony/myfile.txt
+ rm /usr/local/share/Music/test_file
+[311u13@311U13 ~] > /usr/local/share/Music/test_file
+[311u13@311U13 ~] mkdir /usr/local/share/Music/test_dir
+[311u13@311U13 ~] ls -l /usr/local/share/Music
