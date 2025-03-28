@@ -1,0 +1,465 @@
+11@u11-VirtualBox:~$ vim docker
+u11@u11-VirtualBox:~$ vim Dockerfile 
+u11@u11-VirtualBox:~$ docker build -t testjava:0.1 .
+[+] Building 3.9s (1/1) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.6s
+ => => transferring dockerfile: 130B                                       0.1s
+Dockerfile:1
+--------------------
+   1 | >>> 1 FROM openjdk
+   2 |     2 COPY . /java
+   3 |     3 WORKDIR /java
+--------------------
+ERROR: failed to solve: dockerfile parse error on line 1: unknown instruction: 1
+u11@u11-VirtualBox:~$ docker build -t testjava:0.1 
+ERROR: docker: 'docker buildx build' requires 1 argument
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Run 'docker buildx build --help' for more information
+u11@u11-VirtualBox:~$ docker build -t testjava:0.1. .
+[+] Building 3.4s (1/1) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.5s
+ => => transferring dockerfile: 130B                                       0.0s
+Dockerfile:1
+--------------------
+   1 | >>> 1 FROM openjdk
+   2 |     2 COPY . /java
+   3 |     3 WORKDIR /java
+--------------------
+ERROR: failed to solve: dockerfile parse error on line 1: unknown instruction: 1
+u11@u11-VirtualBox:~$ vim index.php
+u11@u11-VirtualBox:~$ vim Dockerfile
+u11@u11-VirtualBox:~$ ls -l
+итого 48
+-rw-rw-r-- 1 u11 u11  179 мар 28 12:33  docker
+-rw-rw-r-- 1 u11 u11   93 мар 28 12:51  Dockerfile
+-rw-rw-r-- 1 u11 u11  169 мар 28 12:43  index.php
+drwx------ 4 u11 u11 4096 фев  7 14:18  snap
+drwxr-xr-x 2 u11 u11 4096 фев  6 16:38  Видео
+drwxr-xr-x 2 u11 u11 4096 фев  6 16:38  Документы
+drwxr-xr-x 2 u11 u11 4096 фев  6 16:38  Загрузки
+drwxr-xr-x 3 u11 u11 4096 фев  7 15:07  Изображения
+drwxr-xr-x 2 u11 u11 4096 фев  6 16:38  Музыка
+drwxr-xr-x 2 u11 u11 4096 фев  6 16:38  Общедоступные
+drwxr-xr-x 2 u11 u11 4096 фев  6 16:38 'Рабочий стол'
+drwxr-xr-x 2 u11 u11 4096 фев  6 16:38  Шаблоны
+u11@u11-VirtualBox:~$ mkdir ex1
+u11@u11-VirtualBox:~$ cd ex1
+u11@u11-VirtualBox:~/ex1$ cp ../Dockerfile .
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1
+ERROR: docker: 'docker buildx build' requires 1 argument
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Run 'docker buildx build --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1 .
+[+] Building 4.5s (1/1) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       1.4s
+ => => transferring dockerfile: 130B                                       0.0s
+Dockerfile:1
+--------------------
+   1 | >>> 1 FROM openjdk
+   2 |     2 COPY . /java
+   3 |     3 WORKDIR /java
+--------------------
+ERROR: failed to solve: dockerfile parse error on line 1: unknown instruction: 1
+u11@u11-VirtualBox:~/ex1$ docker pull openjdk
+Using default tag: latest
+latest: Pulling from library/openjdk
+Digest: sha256:9b448de897d211c9e0ec635a485650aed6e28d4eca1efbc34940560a480b3f1f
+Status: Image is up to date for openjdk:latest
+docker.io/library/openjdk:latest
+u11@u11-VirtualBox:~/ex1$ vim Dockerfile 
+u11@u11-VirtualBox:~/ex1$ docker pull openjdk
+Using default tag: latest
+latest: Pulling from library/openjdk
+Digest: sha256:9b448de897d211c9e0ec635a485650aed6e28d4eca1efbc34940560a480b3f1f
+Status: Image is up to date for openjdk:latest
+docker.io/library/openjdk:latest
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1 .
+[+] Building 3.3s (1/1) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.5s
+ => => transferring dockerfile: 130B                                       0.0s
+Dockerfile:1
+--------------------
+   1 | >>> 1 FROM openjdk
+   2 |     2 COPY . /java
+   3 |     3 WORKDIR /java
+--------------------
+ERROR: failed to solve: dockerfile parse error on line 1: unknown instruction: 1
+u11@u11-VirtualBox:~/ex1$ vim Dockerfile 
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1 .
+[+] Building 25.8s (8/8) FINISHED                                docker:default
+ => [internal] load build definition from Dockerfile                       0.5s
+ => => transferring dockerfile: 120B                                       0.0s
+ => [internal] load metadata for docker.io/library/openjdk:latest          0.0s
+ => [internal] load .dockerignore                                          1.5s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          5.2s
+ => => transferring context: 120B                                          0.0s
+ => [1/4] FROM docker.io/library/openjdk:latest                            4.9s
+ => [2/4] COPY . /java                                                     2.1s
+ => [3/4] WORKDIR /java                                                    3.6s
+ => ERROR [4/4] RUN javac pr001.java                                       9.2s
+------                                                                          
+ > [4/4] RUN javac pr001.java:                                                  
+6.698 error: file not found: pr001.java                                         
+6.701 Usage: javac <options> <source files>
+6.703 use --help for a list of possible options
+------
+Dockerfile:4
+--------------------
+   2 |     COPY . /java
+   3 |     WORKDIR /java
+   4 | >>> RUN javac pr001.java
+   5 |     CMD ["java", "pr001"]
+   6 |     
+--------------------
+ERROR: failed to solve: process "/bin/sh -c javac pr001.java" did not complete successfully: exit code: 2
+u11@u11-VirtualBox:~/ex1$ ls -l
+итого 4
+-rw-rw-r-- 1 u11 u11 83 мар 28 12:58 Dockerfile
+u11@u11-VirtualBox:~/ex1$ docker pull openjdk
+Using default tag: latest
+latest: Pulling from library/openjdk
+Digest: sha256:9b448de897d211c9e0ec635a485650aed6e28d4eca1efbc34940560a480b3f1f
+Status: Image is up to date for openjdk:latest
+docker.io/library/openjdk:latest
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1 .
+[+] Building 9.9s (8/8) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.5s
+ => => transferring dockerfile: 120B                                       0.0s
+ => [internal] load metadata for docker.io/library/openjdk:latest          0.0s
+ => [internal] load .dockerignore                                          0.7s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          0.6s
+ => => transferring context: 31B                                           0.0s
+ => [1/4] FROM docker.io/library/openjdk:latest                            0.0s
+ => CACHED [2/4] COPY . /java                                              0.0s
+ => CACHED [3/4] WORKDIR /java                                             0.0s
+ => ERROR [4/4] RUN javac pr001.java                                       4.6s
+------                                                                          
+ > [4/4] RUN javac pr001.java:                                                  
+2.645 error: file not found: pr001.java                                         
+2.647 Usage: javac <options> <source files>
+2.647 use --help for a list of possible options
+------
+Dockerfile:4
+--------------------
+   2 |     COPY . /java
+   3 |     WORKDIR /java
+   4 | >>> RUN javac pr001.java
+   5 |     CMD ["java", "pr001"]
+   6 |     
+--------------------
+ERROR: failed to solve: process "/bin/sh -c javac pr001.java" did not complete successfully: exit code: 2
+u11@u11-VirtualBox:~/ex1$ vim Dockerfile 
+u11@u11-VirtualBox:~/ex1$ ls 
+Dockerfile
+u11@u11-VirtualBox:~/ex1$ vim Dockerfile
+u11@u11-VirtualBox:~/ex1$ vim pr001.java
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1 .
+[+] Building 17.0s (8/8) FINISHED                                docker:default
+ => [internal] load build definition from Dockerfile                       0.5s
+ => => transferring dockerfile: 120B                                       0.0s
+ => [internal] load metadata for docker.io/library/openjdk:latest          0.0s
+ => [internal] load .dockerignore                                          0.7s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          0.6s
+ => => transferring context: 333B                                          0.0s
+ => CACHED [1/4] FROM docker.io/library/openjdk:latest                     0.0s
+ => [2/4] COPY . /java                                                     2.2s
+ => [3/4] WORKDIR /java                                                    2.8s
+ => ERROR [4/4] RUN javac pr001.java                                       6.5s
+------                                                                          
+ > [4/4] RUN javac pr001.java:                                                  
+4.373 pr001.java:3: error: cannot find symbol                                   
+4.374    System.out.printlm("Проверка работоспособности тестового проекта");    
+4.374              ^                                                            
+4.374   symbol:   method printlm(String)                                        
+4.374   location: variable out of type PrintStream
+4.375 1 error
+------
+Dockerfile:4
+--------------------
+   2 |     COPY . /java
+   3 |     WORKDIR /java
+   4 | >>> RUN javac pr001.java
+   5 |     CMD ["java", "pr001"]
+   6 |     
+--------------------
+ERROR: failed to solve: process "/bin/sh -c javac pr001.java" did not complete successfully: exit code: 1
+u11@u11-VirtualBox:~/ex1$ ls -l
+итого 8
+-rw-rw-r-- 1 u11 u11  83 мар 28 13:11 Dockerfile
+-rw-rw-r-- 1 u11 u11 172 мар 28 13:15 pr001.java
+u11@u11-VirtualBox:~/ex1$ vim pr001.java 
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1 .
+[+] Building 22.4s (9/9) FINISHED                                docker:default
+ => [internal] load build definition from Dockerfile                       0.6s
+ => => transferring dockerfile: 120B                                       0.0s
+ => [internal] load metadata for docker.io/library/openjdk:latest          0.0s
+ => [internal] load .dockerignore                                          0.5s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          0.5s
+ => => transferring context: 244B                                          0.0s
+ => CACHED [1/4] FROM docker.io/library/openjdk:latest                     0.0s
+ => [2/4] COPY . /java                                                     2.2s
+ => [3/4] WORKDIR /java                                                    2.6s
+ => [4/4] RUN javac pr001.java                                             5.8s
+ => exporting to image                                                     5.2s
+ => => exporting layers                                                    4.0s
+ => => writing image sha256:f2a0d50c65ad861a9ecafceeae1d1f7d5df3e85016934  0.1s
+ => => naming to docker.io/library/testjava:0.1                            0.3s
+u11@u11-VirtualBox:~/ex1$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED              SIZE
+testjava     0.1       f2a0d50c65ad   About a minute ago   470MB
+openjdk      latest    71260f256d19   2 years ago          470MB
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name --rm testjava:0.1
+docker: Error response from daemon: Invalid container name (--rm), only [a-zA-Z0-9][a-zA-Z0-9_.-] are allowed
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name --r testjava:0.1
+docker: Error response from daemon: Invalid container name (--r), only [a-zA-Z0-9][a-zA-Z0-9_.-] are allowed
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name --rm testjava:0.1
+docker: Error response from daemon: Invalid container name (--rm), only [a-zA-Z0-9][a-zA-Z0-9_.-] are allowed
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name --php testjava:0.1
+docker: Error response from daemon: Invalid container name (--php), only [a-zA-Z0-9][a-zA-Z0-9_.-] are allowed
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name testjava
+docker: 'docker run' requires at least 1 argument
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+See 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 name testjava 
+Unable to find image 'name:latest' locally
+docker: Error response from daemon: pull access denied for name, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 name testjava 0.1
+Unable to find image 'name:latest' locally
+docker: Error response from daemon: pull access denied for name, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name testjava 
+docker: 'docker run' requires at least 1 argument
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+See 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name f2a0d50c65ad  testjava 
+Unable to find image 'testjava:latest' locally
+docker: Error response from daemon: pull access denied for testjava, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name f2a0d50c65ad testjava 0.1 
+Unable to find image 'testjava:latest' locally
+docker: Error response from daemon: pull access denied for testjava, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 name f2a0d50c65ad testjava
+Unable to find image 'name:latest' locally
+docker: Error response from daemon: pull access denied for name, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name f2a0d50c65ad --rm testjava
+Unable to find image 'testjava:latest' locally
+docker: Error response from daemon: pull access denied for testjava, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name f2a0d50c65ad --rm testjava:0.1.
+Unable to find image 'testjava:0.1.' locally
+docker: Error response from daemon: pull access denied for testjava, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name f2a0d50c65ad --rm testjava:0.1 .
+eda9bdc887641b2b7cd69a28e9a5fdbb6f8aae6cdf02564c85dc401b44482ed7
+docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: exec: ".": executable file not found in $PATH: unknown
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name phpapp --rm testjava:0.1.
+Unable to find image 'testjava:0.1.' locally
+docker: Error response from daemon: pull access denied for testjava, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker run -d -p 8080:80 --name phpapp --rm testjava:0.1
+42d8ba5e095307eeb956e2a4a8d4482174d263b619cfd623aae729999520c7e9
+u11@u11-VirtualBox:~/ex1$ vim index.php
+u11@u11-VirtualBox:~/ex1$ vim index.php
+u11@u11-VirtualBox:~/ex1$ vim pr001.java
+u11@u11-VirtualBox:~/ex1$ vim Dockerfile
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:.01
+ERROR: docker: 'docker buildx build' requires 1 argument
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Run 'docker buildx build --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1
+ERROR: docker: 'docker buildx build' requires 1 argument
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Run 'docker buildx build --help' for more information
+u11@u11-VirtualBox:~/ex1$ docker build -t testjava:0.1 .
+[+] Building 22.3s (9/9) FINISHED                                docker:default
+ => [internal] load build definition from Dockerfile                       0.5s
+ => => transferring dockerfile: 120B                                       0.0s
+ => [internal] load metadata for docker.io/library/openjdk:latest          0.0s
+ => [internal] load .dockerignore                                          0.7s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          0.6s
+ => => transferring context: 445B                                          0.0s
+ => CACHED [1/4] FROM docker.io/library/openjdk:latest                     0.0s
+ => [2/4] COPY . /java                                                     2.3s
+ => [3/4] WORKDIR /java                                                    2.7s
+ => [4/4] RUN javac pr001.java                                             6.1s
+ => exporting to image                                                     4.4s
+ => => exporting layers                                                    3.3s
+ => => writing image sha256:38a9f2fec28a10575f8211e5b03707fb59bad96d7c842  0.1s
+ => => naming to docker.io/library/testjava:0.1                            0.3s
+u11@u11-VirtualBox:~/ex1$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+testjava     0.1       38a9f2fec28a   12 seconds ago   470MB
+<none>       <none>    f2a0d50c65ad   37 minutes ago   470MB
+openjdk      latest    71260f256d19   2 years ago      470MB
+u11@u11-VirtualBox:~/ex1$ cd ..
+u11@u11-VirtualBox:~$ mkdir prj2
+u11@u11-VirtualBox:~$ cd prj2
+u11@u11-VirtualBox:~/prj2$ vim index.php
+u11@u11-VirtualBox:~/prj2$ vim Dockerfile
+u11@u11-VirtualBox:~/prj2$ docker build -t app-php:0.1 .
+[+] Building 5.9s (2/2) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       1.4s
+ => => transferring dockerfile: 111B                                       0.0s
+ => ERROR [internal] load metadata for docker.io/library/php:7.2.apache    1.9s
+------
+ > [internal] load metadata for docker.io/library/php:7.2.apache:
+------
+Dockerfile:1
+--------------------
+   1 | >>> FROM php:7.2.apache
+   2 |     WORKDIR /var/www/html
+   3 |     COPY , /var/www/html
+--------------------
+ERROR: failed to solve: php:7.2.apache: failed to resolve source metadata for docker.io/library/php:7.2.apache: docker.io/library/php:7.2.apache: not found
+u11@u11-VirtualBox:~/prj2$ vim Dockerfile
+u11@u11-VirtualBox:~/prj2$ docker build -t app-php:0.1 .
+[+] Building 20.6s (7/7) FINISHED                                docker:default
+ => [internal] load build definition from Dockerfile                       0.5s
+ => => transferring dockerfile: 111B                                       0.0s
+ => [internal] load metadata for docker.io/library/php:7.2-apache          4.2s
+ => [internal] load .dockerignore                                          1.5s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          2.7s
+ => => transferring context: 2B                                            0.0s
+ => CANCELED [1/3] FROM docker.io/library/php:7.2-apache@sha256:4dc0f0115  4.6s
+ => => resolve docker.io/library/php:7.2-apache@sha256:4dc0f0115acf8c2f0d  2.3s
+ => => sha256:4dc0f0115acf8c2f0df69295ae822e49f5ad5fe8497 1.65kB / 1.65kB  0.0s
+ => => sha256:25417b6c9c2e1a52b551ba89087f4d07c216f587847 3.24kB / 3.24kB  0.0s
+ => CACHED [2/3] WORKDIR /var/www/html                                     0.0s
+ => ERROR [3/3] COPY , /var/www/html                                       0.0s
+------
+ > [3/3] COPY , /var/www/html:
+------
+Dockerfile:3
+--------------------
+   1 |     FROM php:7.2-apache
+   2 |     WORKDIR /var/www/html
+   3 | >>> COPY , /var/www/html
+   4 |     EXPOSE 80
+   5 |     
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref 6132cadd-cd2d-4587-8fa8-cf31438631ac::kao53mgbyfpgh95uj8vnab5bt: "/,": not found
+u11@u11-VirtualBox:~/prj2$ vim Dockerfile
+u11@u11-VirtualBox:~/prj2$ docker build -t app-php:0.1 .
+[+] Building 92.5s (8/8) FINISHED                                docker:default
+ => [internal] load build definition from Dockerfile                       0.5s
+ => => transferring dockerfile: 111B                                       0.0s
+ => [internal] load metadata for docker.io/library/php:7.2-apache          1.6s
+ => [internal] load .dockerignore                                          0.5s
+ => => transferring context: 2B                                            0.0s
+ => [1/3] FROM docker.io/library/php:7.2-apache@sha256:4dc0f0115acf8c2f0  76.3s
+ => => resolve docker.io/library/php:7.2-apache@sha256:4dc0f0115acf8c2f0d  1.7s
+ => => sha256:4dc0f0115acf8c2f0df69295ae822e49f5ad5fe8497 1.65kB / 1.65kB  0.0s
+ => => sha256:25417b6c9c2e1a52b551ba89087f4d07c216f587847 3.24kB / 3.24kB  0.0s
+ => => sha256:c61d277263e19d2ce30a6bae41115c811eb0f9274 13.18kB / 13.18kB  0.0s
+ => => sha256:6ec7b7d162b24bd6df88abde89ceb6d7bbc2be927 27.10MB / 27.10MB  5.3s
+ => => sha256:db606474d60ce31604505c7d6dad9a66cb42f3818fca738 225B / 225B  1.5s
+ => => sha256:afb30f0cd8e0ff78b5eecdc2d9365a50441ad83c 76.65MB / 76.65MB  27.2s
+ => => sha256:3bb2e805159413e5278b859f7fbb86ddfc99e667cb705d5 225B / 225B  3.9s
+ => => sha256:4c761b44e2ccbff3f10b254b21bb00a52dfd26919 18.68MB / 18.68MB  9.3s
+ => => extracting sha256:6ec7b7d162b24bd6df88abde89ceb6d7bbc2be927f025c9d  1.6s
+ => => sha256:c2199db96575122fd559c29b619a2773fe9069e0266312a 434B / 434B  6.5s
+ => => sha256:1b9a9381eea8f93068e8043f18ea59b709c07256e2f9096 487B / 487B  7.7s
+ => => sha256:fd07bbc59d347c16686f107676436a2281e41280 12.65MB / 12.65MB  12.1s
+ => => extracting sha256:db606474d60ce31604505c7d6dad9a66cb42f3818fca7388  0.0s
+ => => sha256:72b73ab27698b55aa309173abd0cdd758291b9feaac313 494B / 494B  11.0s
+ => => sha256:983308f4f0d6304dc6cecde8fd66ba5a94a08873 13.82MB / 13.82MB  16.3s
+ => => sha256:6c13f026e6da09e10ca2edb704b335a62bac29e549 2.27kB / 2.27kB  13.1s
+ => => sha256:e5e6cd16368920e691da5b8791184d7a8d579dd5cd5e8c 248B / 248B  14.0s
+ => => sha256:5c5516e56582a30bd2e69c32d17a169ed7227900318e9d 210B / 210B  15.6s
+ => => sha256:154729f6ba8609ef7d5af1bfad81efe814cbbca1850983 897B / 897B  16.7s
+ => => extracting sha256:afb30f0cd8e0ff78b5eecdc2d9365a50441ad83c5db5f1e8  3.0s
+ => => extracting sha256:3bb2e805159413e5278b859f7fbb86ddfc99e667cb705d5d  0.0s
+ => => extracting sha256:4c761b44e2ccbff3f10b254b21bb00a52dfd26919ad9e3f7  0.6s
+ => => extracting sha256:c2199db96575122fd559c29b619a2773fe9069e0266312a6  0.0s
+ => => extracting sha256:1b9a9381eea8f93068e8043f18ea59b709c07256e2f90962  0.0s
+ => => extracting sha256:fd07bbc59d347c16686f107676436a2281e4128033f105ca  0.5s
+ => => extracting sha256:72b73ab27698b55aa309173abd0cdd758291b9feaac31342  0.0s
+ => => extracting sha256:983308f4f0d6304dc6cecde8fd66ba5a94a08873a3b8205e  1.0s
+ => => extracting sha256:6c13f026e6da09e10ca2edb704b335a62bac29e549a2d0b3  0.0s
+ => => extracting sha256:e5e6cd16368920e691da5b8791184d7a8d579dd5cd5e8c53  0.0s
+ => => extracting sha256:5c5516e56582a30bd2e69c32d17a169ed7227900318e9d7b  0.0s
+ => => extracting sha256:154729f6ba8609ef7d5af1bfad81efe814cbbca185098349  0.0s
+ => [internal] load build context                                          1.1s
+ => => transferring context: 237B                                          0.0s
+ => [2/3] WORKDIR /var/www/html                                            2.5s
+ => [3/3] COPY . /var/www/html                                             2.9s
+ => exporting to image                                                     3.6s
+ => => exporting layers                                                    2.5s
+ => => writing image sha256:dd58289d85c8e70678d3c700cb0ac32af61768cf6dea2  0.1s
+ => => naming to docker.io/library/app-php:0.1                             0.3s
+u11@u11-VirtualBox:~/prj2$ docker run -it --name php1 --rm -p 8080.80 aph-php; 
+docker: invalid containerPort: 8080.80
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/prj2$ docker run -it --name php1 --rm -p 8080.80 aph-php:0.1
+docker: invalid containerPort: 8080.80
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/prj2$ docker run -it --name php1 --rm -p 8080.80 aph-php:0.1
+docker: invalid containerPort: 8080.80
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/prj2$ docker run -it --name php1 --rm -p 8080:80 aph-php:0.1
+Unable to find image 'aph-php:0.1' locally
+docker: Error response from daemon: pull access denied for aph-php, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+u11@u11-VirtualBox:~/prj2$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED             SIZE
+app-php      0.1       dd58289d85c8   13 minutes ago      410MB
+testjava     0.1       38a9f2fec28a   24 minutes ago      470MB
+<none>       <none>    f2a0d50c65ad   About an hour ago   470MB
+openjdk      latest    71260f256d19   2 years ago         470MB
+u11@u11-VirtualBox:~/prj2$ docker run -it --name php1 --rm -p 8080:80 app-php:0.1
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+[Fri Mar 28 07:18:53.520678 2025] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/7.2.34 configured -- resuming normal operations
+[Fri Mar 28 07:18:53.521993 2025] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+172.17.0.1 - - [28/Mar/2025:07:33:21 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/116.0"
+172.17.0.1 - - [28/Mar/2025:07:33:22 +0000] "GET /favicon.ico HTTP/1.1" 404 489 "http://localhost:8080/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/116.0"
+1 прописываем комманды для создания образов и контейнеров 
+2 далее прописывае во 2 терминале комманды
+docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+4abd7a4d38b9   app-php:0.1   "docker-php-entrypoi…"   13 minutes ago   Up 13 minutes   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   php1
+3 в браузере переходим по ссылке http://localhost:8080/
+4 результат <.php e cho 'Выполнение пшп-система на веб-сервере' ?> 
