@@ -1,0 +1,218 @@
+Run 'docker network create --help' for more information
+u11@u11-VirtualBox:~$ docker network create --driver=bridge --subnet=192.168.46.0/26 --gateway=192.168.44.1 net1
+no matching subnet for gateway 192.168.44.1
+u11@u11-VirtualBox:~$ docker network create --driver=bridge --subnet=192.168.46.0/26 --gateway=192.168.46.1 net1
+5f27f9555dbeb8506704f2b841bce86ad4430acbe45aa3623971e1124f5cb7ff
+u11@u11-VirtualBox:~$ docker network create --driver=bridge --subnet=192.168.38.0/26 --gateway=192.168.38.1 net2
+72824e19baf191cda0bf72551a47ba45b0d99171806578204299c160b63b5f13
+u11@u11-VirtualBox:~$ docker network create --driver=bridge --subnet=192.168.22.0/27 --gateway=192.168.22.1 net3
+3f592de27bc9d7e12ed00031eb59e36ecb5d4b506e4e8db6762366212c132aa2
+u11@u11-VirtualBox:~$ docker network create --driver=bridge --subnet=192.168.7.0/28 --gateway=192.168.7.1 net4
+90854c615d34976587e2fd207318baef9b1374fbec92a133e2798f4ccc6e359d
+u11@u11-VirtualBox:~$ docker network inspect net1docker network inspect net2
+[
+    {
+        "Name": "net2",
+        "Id": "72824e19baf191cda0bf72551a47ba45b0d99171806578204299c160b63b5f13",
+        "Created": "2025-04-10T14:15:07.623419363+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.38.0/26",
+                    "Gateway": "192.168.38.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+Error response from daemon: network net1docker not found
+Error response from daemon: network network not found
+Error response from daemon: network inspect not found
+u11@u11-VirtualBox:~$ docker network inspect net1docker network inspect net4
+[
+    {
+        "Name": "net4",
+        "Id": "90854c615d34976587e2fd207318baef9b1374fbec92a133e2798f4ccc6e359d",
+        "Created": "2025-04-10T14:17:02.134369632+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.7.0/28",
+                    "Gateway": "192.168.7.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+Error response from daemon: network net1docker not found
+Error response from daemon: network network not found
+Error response from daemon: network inspect not found
+u11@u11-VirtualBox:~$ docker run -d --name container11 --network net1 ubuntu sleep infinitydocker run -d --name container12 --network net1 ubuntu sleep infinity
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+2726e237d1a3: Pull complete 
+Digest: sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02
+Status: Downloaded newer image for ubuntu:latest
+2e84783de7876edf812f495498ab95ed295604dcd74ee59bf796331d702535c5
+u11@u11-VirtualBox:~$ docker network inspect 
+192.168.80.0  bridge        host          net1          net2          net3          net4          none          
+u11@u11-VirtualBox:~$ docker network inspect net1
+[
+    {
+        "Name": "net1",
+        "Id": "5f27f9555dbeb8506704f2b841bce86ad4430acbe45aa3623971e1124f5cb7ff",
+        "Created": "2025-04-10T14:14:01.050239933+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.46.0/26",
+                    "Gateway": "192.168.46.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+u11@u11-VirtualBox:~$ docker network inspect net2
+[
+    {
+        "Name": "net2",
+        "Id": "72824e19baf191cda0bf72551a47ba45b0d99171806578204299c160b63b5f13",
+        "Created": "2025-04-10T14:15:07.623419363+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.38.0/26",
+                    "Gateway": "192.168.38.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+u11@u11-VirtualBox:~$ docker network inspect net3
+[
+    {
+        "Name": "net3",
+        "Id": "3f592de27bc9d7e12ed00031eb59e36ecb5d4b506e4e8db6762366212c132aa2",
+        "Created": "2025-04-10T14:16:09.584106284+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.22.0/27",
+                    "Gateway": "192.168.22.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+u11@u11-VirtualBox:~$ docker network inspect net4
+[
+    {
+        "Name": "net4",
+        "Id": "90854c615d34976587e2fd207318baef9b1374fbec92a133e2798f4ccc6e359d",
+        "Created": "2025-04-10T14:17:02.134369632+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.7.0/28",
+                    "Gateway": "192.168.7.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
