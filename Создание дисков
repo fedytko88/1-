@@ -1,0 +1,49 @@
+ssh f8888@192.168.11.2
+The authenticity of host '192.168.11.2 (192.168.11.2)' can't be established.
+ED25519 key fingerprint is SHA256:KwRK89/RKcHV1ESCrWxYV6B6b1mH9atk2WTVplBfZnw.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.11.2' (ED25519) to the list of known hosts.
+f8888@192.168.11.2's password: 
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-139-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+  System information as of Сб 03 мая 2025 06:58:36 UTC
+
+  System load:  0.00244140625      Processes:               115
+  Usage of /:   46.6% of 11.21GB   Users logged in:         1
+  Memory usage: 12%                IPv4 address for enp0s3: 192.168.11.2
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+79 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+New release '24.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Sat May  3 05:59:47 2025
+f8888@f8888:~$ sudo fdisk -l /dev/sdb
+[sudo] password for f8888: 
+Disk /dev/sdb: 5 GiB, 5368709120 bytes, 10485760 sectors
+Disk model: VBOX HARDDISK   
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x4f070fd0
+
+Device     Boot Start      End  Sectors   Size Id Type
+/dev/sdb1        2048     2304      257 128,5K 83 Linux
+/dev/sdb2        4096     4352      257 128,5K  5 Extended
+/dev/sdb3        6144     6272      129  64,5K 83 Linux
+/dev/sdb4        8192 10485759 10477568     5G 83 Linux
